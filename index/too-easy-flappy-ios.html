@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Average Flappy Bird Game</title>
+    <title>Too Easy Flappy Bird Game</title>
     <style>
         body {
             margin: 0;
@@ -128,7 +128,7 @@
             width: 30,
             height: 25,
             velocity: 0,
-            gravity: 0.3,
+            gravity: 0.5,
             jumpStrength: -8,
             color: '#FFD700'
         };
@@ -136,9 +136,8 @@
         // Pipes array
         let pipes = [];
         const pipeWidth = 60;
-        const pipeGap = 170;
-        const basePipeSpeed = 2;
-        let currentPipeSpeed = 2;
+        const pipeGap = 150;
+        const pipeSpeed = 2.5;
         
         // Game loop
         let animationId;
@@ -198,26 +197,10 @@
             }
         }
         
-        function updatePipeSpeed() {
-            // Progressive speed increases
-            if (score >= 20) {
-                currentPipeSpeed = basePipeSpeed + 2; // Speed = 4 at 20+ points
-            } else if (score >= 10) {
-                currentPipeSpeed = basePipeSpeed + 1; // Speed = 3 at 10-19 points
-            } else if (score >= 5) {
-                currentPipeSpeed = basePipeSpeed + 0.5; // Speed = 2.5 at 5-9 points
-            } else {
-                currentPipeSpeed = basePipeSpeed; // Speed = 2 at 0-4 points
-            }
-        }
-        
         function updatePipes() {
-            // Update speed based on score
-            updatePipeSpeed();
-            
             // Move pipes
             pipes.forEach(pipe => {
-                pipe.x -= currentPipeSpeed;
+                pipe.x -= pipeSpeed;
             });
             
             // Remove pipes that have gone off screen
@@ -287,7 +270,6 @@
             gameRunning = true;
             score = 0;
             pipes = [];
-            currentPipeSpeed = basePipeSpeed; // Reset speed
             
             // Reset bird position
             bird.y = canvas.height / 2;
@@ -327,7 +309,7 @@
                 if (gameRunning) {
                     jump();
                 } else {
-                    startGame();
+                    startGame(); // Start or restart the game
                 }
             }
         });
@@ -336,7 +318,7 @@
             if (gameRunning) {
                 jump();
             } else {
-                startGame();
+                startGame(); // Start or restart the game
             }
         });
         
@@ -346,7 +328,7 @@
             if (gameRunning) {
                 jump();
             } else {
-                startGame();
+                startGame(); // Start or restart the game
             }
         });
         
